@@ -49,7 +49,7 @@ else:
                 st.rerun()
                 
 st.subheader("🗑️ Elimina giocatore")
-scelta_elimina = st.selectbbox("Scegli giocatore da eliminare:", [""] + [g["nome"] for g in st.session_state.giocatori], key="elimina_select")
+scelta_elimina = st.selectbox("Scegli giocatore da eliminare:", [""] + [g["nome"] for g in st.session_state.giocatori], key="elimina_select")
 
 if scelta_elimina:
     if st.button(f"🗑️ ELIMINA {scelta_elimina}", type="secondary"):
@@ -63,3 +63,4 @@ if scelta_elimina:
 # Debug
 with st.expander("🐛 Debug"):
     st.write("Dati:", st.session_state.giocatori)
+
