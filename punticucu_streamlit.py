@@ -4,7 +4,7 @@ import streamlit as st
 if 'giocatori' not in st.session_state:
     st.session_state.giocatori = []
 
-st.title("🍕 Segnapunti CUCÙ")
+st.title(" Segnapunti CUCÙ ")
 
 # Colonna sinistra: Aggiungi
 col1, col2 = st.columns(2)
@@ -47,7 +47,19 @@ else:
             if st.button(f"❤️ Aggiungi vita a {scelta}", key=f"add_{idx}"):
                 st.session_state.giocatori[idx]["vite"] += 1
                 st.rerun()
+                
+st.subheader("🗑️ Elimina giocatore")
+scelta_elimina = st.selectbbox("Scegli giocatore da eliminare:", [""] + [g["nome"] for g in st.session_state.giocatori], key="elimina_select")
 
+if scelta_elimina:
+    if st.button(f"🗑️ ELIMINA {scelta_elimina}", type="secondary"):
+        for i, g in enumerate(st.session_state.giocatori):
+            if g["nome"] == scelta_elimina:
+                del st.session_state.giocatori[i]
+                st.success(f"👋 {scelta_elimina} eliminato!")
+                st.rerun()
+                break
+        
 # Debug
 with st.expander("🐛 Debug"):
     st.write("Dati:", st.session_state.giocatori)
